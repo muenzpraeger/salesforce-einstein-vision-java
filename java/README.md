@@ -96,7 +96,7 @@ The workflow for using Predictive Vision can be described with the following sce
 * After you've finished adding examples you can train the dataset.
 * After the training you can start to predict if a given image belongs to one of the defined labels.
 
-You can find two examples [here in the GitHub repo](https://github.com/muenzpraeger/salesforce-einstein-predictive-vision/tree/master/java/src/main/java/com/winkelmeyer/salesforce/predictivevision/test) for the aforementioned workflow.
+You can find two examples [here in the GitHub repo](https://github.com/muenzpraeger/salesforce-einstein-predictive-vision/tree/master/java/src/test/java/com/winkelmeyer/salesforce/predictivevision/tests) for the aforementioned workflow.
 
 Please check the MetaMind documentation for recommendations regarding image quality, amount of examples and so forth.
 
