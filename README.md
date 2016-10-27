@@ -3,7 +3,7 @@
 This respository showcases how to use the [Salesforce Einstein Predictive Vision API](http://docs.metamind.io/v1/docs) using different programming languages.
 
 You can find the following implementations:
-- [Java](https://github.com/muenzpraeger/salesforce-einstein-predictive-vision/blob/master/java/README.md)
+- [Java](hhttps://github.com/muenzpraeger/salesforce-einstein-predictive-vision/tree/master/java)
 - node.js (coming soon)
 - Swift (coming soon)
 - Salesforce Lightning (coming soon)
