@@ -1,6 +1,6 @@
 # salesforce-einstein-predictive-vision-java
 
-This repository showcases how to use the [Salesforce Einstein Predictive Vision API](http://docs.metamind.io/v1/docs) using using a Java based wrapper.
+This repository showcases how to use the [Salesforce Einstein Predictive Vision API](http://docs.metamind.io/v1/docs) using a Java based wrapper.
 
 Please check the [product documentation](http://docs.metamind.io/v1/docs) for general information about what the Salesforce Einstein Predictive Vision API is, how to use it and when it'll be available for you.
 
@@ -31,7 +31,7 @@ repositories {
 }
 ```
 
-Add this dependeny to your build.gradle file.
+Add this dependency to your build.gradle file.
 
 ```
 compile 'com.winkelmeyer:salesforce-einstein-predictive-vision:1.0.0'
@@ -89,8 +89,8 @@ As this library is basically a wrapper for using the [Salesforce Einstein Predic
 
 The workflow for using Predictive Vision can be described with the following scenario.
 
-* First you identify image categories that need to be identifier (i. e. Beaches, Mountains etc.).
-* Then you create a dataset which will hold all thoseimage categories.
+* First you identify image categories that need to be identified (i. e. Beaches, Mountains etc.).
+* Then you create a dataset which will hold all those image categories.
 * You add for each identified image category a so called "label" to the dataset.
 * For every label you add a number of example images to the dataset.
 * After you've finished adding examples you can train the dataset.
