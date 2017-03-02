@@ -1,8 +1,8 @@
-# salesforce-einstein-predictive-vision-java
+# salesforce-einstein-vision-java
 
-This repository showcases how to use the [Salesforce Einstein Predictive Vision API](http://docs.metamind.io/v1/docs) using a Java based wrapper.
+This repository showcases how to use the [Salesforce Einstein Vision API](https://metamind.readme.io/) using a Java based wrapper.
 
-Please check the [product documentation](http://docs.metamind.io/v1/docs) for general information about what the Salesforce Einstein Predictive Vision API is, how to use it and when it'll be available for you.
+Please check the [product documentation](https://metamind.readme.io/) for general information about what the Salesforce Einstein Vision API is, how to use it and when it'll be available for you.
 
 
 # Run-On-Your-Own
@@ -13,7 +13,7 @@ For running the app on your own you'll need to fulfill the following requirement
 * Access to a Salesforce org, i. e. a Developer Edition (You can [signup here for free](https://developer.salesforce.com/signup) if you don't have one).
 * An API account for Salesforce MetaMind.
 
-Please find the detailed instructions for how to setup access to the [MetaMind API here](http://docs.metamind.io/docs/what-you-need-to-call-api).
+Please find the detailed instructions for how to setup access to the [MetaMind API here](https://metamind.readme.io/docs/what-you-need-to-call-api).
 
 ## Downloading the library
 
@@ -85,7 +85,7 @@ Then add this dependeny to the pom.xml.
 
 ## Getting started
 
-As this library is basically a wrapper for using the [Salesforce Einstein Predictive Vision API](http://docs.metamind.io/v1/docs) it is highly recommended to checkout the API documentation.
+As this library is basically a wrapper for using the [Salesforce Einstein Vision API](https://metamind.readme.io/) it is highly recommended to checkout the API documentation.
 
 The workflow for using Predictive Vision can be described with the following scenario.
 
@@ -96,7 +96,7 @@ The workflow for using Predictive Vision can be described with the following sce
 * After you've finished adding examples you can train the dataset.
 * After the training you can start to predict if a given image belongs to one of the defined labels.
 
-You can find two examples [here in the GitHub repo](https://github.com/muenzpraeger/salesforce-einstein-predictive-vision/tree/master/java/src/test/java/com/winkelmeyer/salesforce/predictivevision/tests) for the aforementioned workflow.
+You can find two examples [here in the GitHub repo](https://github.com/muenzpraeger/salesforce-einstein-vision/tree/master/src/test/java/com/winkelmeyer/salesforce/predictivevision/tests) for the aforementioned workflow.
 
 Please check the MetaMind documentation for recommendations regarding image quality, amount of examples and so forth.
 
