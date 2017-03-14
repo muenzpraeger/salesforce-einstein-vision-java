@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'predictive-vision-java'
+rootProject.name = 'einstein-vision-java'
