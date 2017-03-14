@@ -104,8 +104,8 @@ public class PredictionService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Dataset createDatasetFromUrlAsynch(String url) throws Exception {
-		logger.info("Starting {} call from remote zip file {}", "createDatasetFromUrlAsynch", url);
+	public Dataset createDatasetFromUrlAsync(String url) throws Exception {
+		logger.info("Starting {} call from remote zip file {}", "createDatasetFromUrlAsync", url);
 		BodyPartDatasetUrl parts = new BodyPartDatasetUrl(url);
 		HttpClient client = new HttpClient(this, DATASETS + "/upload", parts.build());
 		logger.info("Target URL is {}", client.getUrl());
@@ -113,7 +113,7 @@ public class PredictionService {
 		while(isExecuting()) {
 			logger.info("Status is: {}", isExecuting());
 		}
-		logger.info("Call {} has been executed.", "createDatasetFromUrlAsynch");
+		logger.info("Call {} has been executed.", "createDatasetFromUrlAsync");
 		if (client.isError()) {
 			handleError(client.getResponseError());
 		} else {
@@ -136,8 +136,8 @@ public class PredictionService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Dataset createDatasetFromZipFileAsynch(String filePath) throws Exception {
-		logger.info("Starting {} call from local zip file {}", "createDatasetFromZipFileAsynch", filePath);
+	public Dataset createDatasetFromZipFileAsync(String filePath) throws Exception {
+		logger.info("Starting {} call from local zip file {}", "createDatasetFromZipFileAsync", filePath);
 		BodyPartDatasetZipFile parts = new BodyPartDatasetZipFile(filePath);
 		HttpClient client = new HttpClient(this, DATASETS + "/upload", parts.build());
 		logger.info("Target URL is {}", client.getUrl());
@@ -145,7 +145,71 @@ public class PredictionService {
 		while(isExecuting()) {
 			logger.info("Status is: {}", isExecuting());
 		}
-		logger.info("Call {} has been executed.", "createDatasetFromZipFileAsynch");
+		logger.info("Call {} has been executed.", "createDatasetFromZipFileAsync");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			Dataset dataset = mapper.readValue(client.getData(), Dataset.class);
+			logger.info("New Dataset with id {} has been created.", dataset.getId());
+			return dataset;
+		}
+		return null;
+	}
+
+	/**
+	 * Creates a new Dataset from a local zip file. A Dataset is basically a group of different object types (named as "Label").
+	 * 
+	 * - The maximum file size is 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param url
+	 * The remote url
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createDatasetFromUrlSync(String url) throws Exception {
+		logger.info("Starting {} call from remote zip file {}", "createDatasetFromUrlSync", url);
+		BodyPartDatasetUrl parts = new BodyPartDatasetUrl(url);
+		HttpClient client = new HttpClient(this, DATASETS + "/upload/sync", parts.build());
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting());
+		}
+		logger.info("Call {} has been executed.", "createDatasetFromUrlSync");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			Dataset dataset = mapper.readValue(client.getData(), Dataset.class);
+			logger.info("New Dataset with id {} has been created.", dataset.getId());
+			return dataset;
+		}
+		return null;
+	}
+	
+	/**
+	 * Creates a new Dataset from a remote zip file. A Dataset is basically a group of different object types (named as "Label").
+	 * 
+	 * - The maximum file size if 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param filePath
+	 * The local file path of the zip file.
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createDatasetFromZipFileSync(String filePath) throws Exception {
+		logger.info("Starting {} call from local zip file {}", "createDatasetFromZipFileSync", filePath);
+		BodyPartDatasetZipFile parts = new BodyPartDatasetZipFile(filePath);
+		HttpClient client = new HttpClient(this, DATASETS + "/upload/sync", parts.build());
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting());
+		}
+		logger.info("Call {} has been executed.", "createDatasetFromZipFileSync");
 		if (client.isError()) {
 			handleError(client.getResponseError());
 		} else {
@@ -335,7 +399,7 @@ public class PredictionService {
 	 * @throws Exception
 	 */
 	public Dataset createExamplesFromUrl(long datasetId, String url) throws Exception {
-		logger.info("Starting {} call from remote zip file {}", "createExamplesFromUrlAsynch", url);
+		logger.info("Starting {} call from remote zip file {}", "createExamplesFromUrl", url);
 		BodyPartDatasetUrl parts = new BodyPartDatasetUrl(url);
 		HttpClient client = new HttpClient(this, DATASETS + "/" + datasetId, parts.build());
 		client.setPut(true);
@@ -344,7 +408,7 @@ public class PredictionService {
 		while(isExecuting()) {
 			logger.info("Status is: {}", isExecuting());
 		}
-		logger.info("Call {} has been executed.", "createExamplesFromUrlAsynch");
+		logger.info("Call {} has been executed.", "createExamplesFromUrl");
 		if (client.isError()) {
 			handleError(client.getResponseError());
 		} else {
@@ -388,7 +452,7 @@ public class PredictionService {
 	 * @throws Exception
 	 */
 	public Dataset createExamplesFromZipFile(long datasetId, String filePath) throws Exception {
-		logger.info("Starting {} call from local zip file {}", "createExamplesFromZipFileAsynch", filePath);
+		logger.info("Starting {} call from local zip file {}", "createExamplesFromZipFile", filePath);
 		BodyPartDatasetZipFile parts = new BodyPartDatasetZipFile(filePath);
 		HttpClient client = new HttpClient(this, DATASETS + "/" + datasetId, parts.build());
 		client.setPut(true);
@@ -397,7 +461,7 @@ public class PredictionService {
 		while(isExecuting()) {
 			logger.info("Status is: {}", isExecuting());
 		}
-		logger.info("Call {} has been executed.", "createExamplesFromZipFileAsynch");
+		logger.info("Call {} has been executed.", "createExamplesFromZipFile");
 		if (client.isError()) {
 			handleError(client.getResponseError());
 		} else {
