@@ -36,7 +36,7 @@ public class BodyPartDatasetUrl {
 
 	public List<Part> build() {
 		List<Part> parts = new ArrayList<Part>();
-		parts.add(new StringPart("url", url));
+		parts.add(new StringPart("path", url));
 		return parts;
 	}
 
