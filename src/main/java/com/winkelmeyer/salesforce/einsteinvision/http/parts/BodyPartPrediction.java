@@ -1,4 +1,4 @@
-package com.winkelmeyer.salesforce.predictivevision.http.parts;
+package com.winkelmeyer.salesforce.einsteinvision.http.parts;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.winkelmeyer.salesforce.predictivevision.model;
+package com.winkelmeyer.salesforce.einsteinvision.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,15 @@
-package com.winkelmeyer.salesforce.predictivevision.model;
+package com.winkelmeyer.salesforce.einsteinvision.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "id", "name", "createdAt", "updatedAt", "labelSummary", "totalExamples", "totalLabels", "object" })
+@JsonPropertyOrder({ "available", "id", "name", "createdAt", "updatedAt", "labelSummary", "statusMsg", "totalExamples", "totalLabels", "object" })
 public class Dataset {
 
+	@JsonProperty("available")
+	private Boolean available;
 	@JsonProperty("id")
 	private Integer id;
 	@JsonProperty("name")
@@ -18,6 +20,8 @@ public class Dataset {
 	private String updatedAt;
 	@JsonProperty("labelSummary")
 	private LabelSummary labelSummary;
+	@JsonProperty("statusMsg")
+	private String statusMsg;
 	@JsonProperty("totalExamples")
 	private Integer totalExamples;
 	@JsonProperty("totalLabels")
@@ -25,10 +29,10 @@ public class Dataset {
 	@JsonProperty("object")
 	private String object;
 
-	
-    public Dataset() {
-    }
-	
+
+	public Dataset() {
+	}
+
 	/**
 	 * 
 	 * @return The id
@@ -180,23 +184,37 @@ public class Dataset {
 	public void setObject(String object) {
 		this.object = object;
 	}
-	
-	
-	// TASKS
-    public boolean train() {
-        return true;
-    }
-    
-    public boolean train(float learningRate) {
-        return true;
-    }
-    
-    public boolean train(int epochs) {
-        return true;
-    }
-    
-    public boolean train(int epochs, float learningRate) {
-        return true;
-    }
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Boolean getAvailable() {
+		return available;
+	}
+
+	/**
+	 * 
+	 * @param available
+	 */
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getStatusMsg() {
+		return statusMsg;
+	}
+
+	/**
+	 * 
+	 * @param statusMsg
+	 */
+	public void setStatusMsg(String statusMsg) {
+		this.statusMsg = statusMsg;
+	}
 
 }

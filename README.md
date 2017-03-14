@@ -34,7 +34,7 @@ repositories {
 Add this dependency to your build.gradle file.
 
 ```
-compile 'com.winkelmeyer:salesforce-einstein-predictive-vision:1.0.0'
+compile 'com.winkelmeyer:salesforce-einstein-vision:1.0.0'
 ```
 
 ### Maven
@@ -72,13 +72,13 @@ Please make sure to reference in your pom.xml to the Bintray download page.
 </activeProfiles>
 ```
 
-Then add this dependeny to the pom.xml.
+Then add this dependency to the pom.xml.
 
 ```
 <dependency>
   <groupId>com.winkelmeyer</groupId>
-  <artifactId>salesforce-einstein-predictive-vision</artifactId>
-  <version>1.0.0</version>
+  <artifactId>salesforce-einstein-vision</artifactId>
+  <version>1.1.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -87,7 +87,7 @@ Then add this dependeny to the pom.xml.
 
 As this library is basically a wrapper for using the [Salesforce Einstein Vision API](https://metamind.readme.io/) it is highly recommended to checkout the API documentation.
 
-The workflow for using Predictive Vision can be described with the following scenario.
+The workflow for using Einstein Vision can be described with the following scenario.
 
 * First you identify image categories that need to be identified (i. e. Beaches, Mountains etc.).
 * Then you create a dataset which will hold all those image categories.
@@ -96,7 +96,7 @@ The workflow for using Predictive Vision can be described with the following sce
 * After you've finished adding examples you can train the dataset.
 * After the training you can start to predict if a given image belongs to one of the defined labels.
 
-You can find two examples [here in the GitHub repo](https://github.com/muenzpraeger/salesforce-einstein-vision/tree/master/src/test/java/com/winkelmeyer/salesforce/predictivevision/tests) for the aforementioned workflow.
+You can find two examples [here in the GitHub repo](https://github.com/muenzpraeger/salesforce-einstein-vision-java/tree/master/src/test/java/com/winkelmeyer/salesforce/einsteinvision/tests) for the aforementioned workflow.
 
 Please check the MetaMind documentation for recommendations regarding image quality, amount of examples and so forth.
 
@@ -162,4 +162,4 @@ Feel free to contribute to this project via pull requests.
 
 ## License
 
-For licensing see the included [license file](https://github.com/muenzpraeger/salesforce-einstein-predictive-vision/blob/master/LICENSE.md).
+For licensing see the included [license file](https://github.com/muenzpraeger/salesforce-einstein-vision-java/blob/master/LICENSE.md).

@@ -1,12 +1,12 @@
-package com.winkelmeyer.salesforce.predictivevision.model;
+package com.winkelmeyer.salesforce.einsteinvision.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "datasetId", "name", "status", "Progress", "createdAt", "updatedAt", "learningRate", "epochs",
-		"queuePosition", "object", "modelId" })
+@JsonPropertyOrder({ "datasetId", "datasetVersionId", "name", "status", "Progress", "createdAt", "updatedAt", "learningRate", "epochs",
+		"queuePosition", "object", "modelId", "trainParams", "trainStats", "modelType" })
 public class Model {
 	
 	public enum TrainingStatus {
@@ -18,6 +18,8 @@ public class Model {
 
 	@JsonProperty("datasetId")
 	private Integer datasetId;
+	@JsonProperty("datasetVersionId")
+	private Integer datasetVersionId;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("status")
@@ -38,6 +40,12 @@ public class Model {
 	private String object;
 	@JsonProperty("modelId")
 	private String modelId;
+	@JsonProperty("modelType")
+	private String modelType;
+	@JsonProperty("trainParams")
+	private String trainParams;
+	@JsonProperty("trainStats")
+	private String trainStats;
 	@JsonProperty("failureMsg")
 	private String failureMsg;
 
@@ -267,6 +275,62 @@ public class Model {
 	@JsonProperty("failureMsg")
 	public void setFailureMsg(String failureMsg) {
 		this.failureMsg = failureMsg;
+	}
+
+	/**
+	 * @return the datasetVersionId
+	 */
+	public Integer getDatasetVersionId() {
+		return datasetVersionId;
+	}
+
+	/**
+	 * @param datasetVersionId the datasetVersionId to set
+	 */
+	public void setDatasetVersionId(Integer datasetVersionId) {
+		this.datasetVersionId = datasetVersionId;
+	}
+
+	/**
+	 * @return the modelType
+	 */
+	public String getModelType() {
+		return modelType;
+	}
+
+	/**
+	 * @param modelType the modelType to set
+	 */
+	public void setModelType(String modelType) {
+		this.modelType = modelType;
+	}
+
+	/**
+	 * @return the trainParams
+	 */
+	public String getTrainParams() {
+		return trainParams;
+	}
+
+	/**
+	 * @param trainParams the trainParams to set
+	 */
+	public void setTrainParams(String trainParams) {
+		this.trainParams = trainParams;
+	}
+
+	/**
+	 * @return the trainStats
+	 */
+	public String getTrainStats() {
+		return trainStats;
+	}
+
+	/**
+	 * @param trainStats the trainStats to set
+	 */
+	public void setTrainStats(String trainStats) {
+		this.trainStats = trainStats;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.winkelmeyer.salesforce.predictivevision.exceptions;
+package com.winkelmeyer.salesforce.einsteinvision.exceptions;
 
 public class TooManyValuesException extends Exception {
 

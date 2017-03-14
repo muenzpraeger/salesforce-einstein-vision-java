@@ -1,4 +1,4 @@
-package com.winkelmeyer.salesforce.predictivevision.model;
+package com.winkelmeyer.salesforce.einsteinvision.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,13 +1,13 @@
-package com.winkelmeyer.salesforce.predictivevision.tests;
+package com.winkelmeyer.salesforce.einsteinevision.tests;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.winkelmeyer.salesforce.predictivevision.PredictionService;
-import com.winkelmeyer.salesforce.predictivevision.model.Dataset;
-import com.winkelmeyer.salesforce.predictivevision.model.Model;
-import com.winkelmeyer.salesforce.predictivevision.model.PredictionResult;
-import com.winkelmeyer.salesforce.predictivevision.model.Probability;
+import com.winkelmeyer.salesforce.einsteinvision.PredictionService;
+import com.winkelmeyer.salesforce.einsteinvision.model.Dataset;
+import com.winkelmeyer.salesforce.einsteinvision.model.Model;
+import com.winkelmeyer.salesforce.einsteinvision.model.PredictionResult;
+import com.winkelmeyer.salesforce.einsteinvision.model.Probability;
 
 /**
  * This sample class predicts the association of the given image with the available Datasets. 

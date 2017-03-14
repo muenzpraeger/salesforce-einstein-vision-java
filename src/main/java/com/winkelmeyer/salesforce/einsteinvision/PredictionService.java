@@ -1,22 +1,24 @@
-package com.winkelmeyer.salesforce.predictivevision;
+package com.winkelmeyer.salesforce.einsteinvision;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.winkelmeyer.salesforce.predictivevision.http.HttpClient;
-import com.winkelmeyer.salesforce.predictivevision.http.parts.BodyPartDataset;
-import com.winkelmeyer.salesforce.predictivevision.http.parts.BodyPartExample;
-import com.winkelmeyer.salesforce.predictivevision.http.parts.BodyPartLabel;
-import com.winkelmeyer.salesforce.predictivevision.http.parts.BodyPartPrediction;
-import com.winkelmeyer.salesforce.predictivevision.http.parts.BodyPartTraining;
-import com.winkelmeyer.salesforce.predictivevision.model.Dataset;
-import com.winkelmeyer.salesforce.predictivevision.model.Example;
-import com.winkelmeyer.salesforce.predictivevision.model.Label;
-import com.winkelmeyer.salesforce.predictivevision.model.Model;
-import com.winkelmeyer.salesforce.predictivevision.model.ModelMetrics;
-import com.winkelmeyer.salesforce.predictivevision.model.PredictionResult;
+import com.winkelmeyer.salesforce.einsteinvision.http.HttpClient;
+import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartDataset;
+import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartDatasetUrl;
+import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartDatasetZipFile;
+import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartExample;
+import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartLabel;
+import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartPrediction;
+import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartTraining;
+import com.winkelmeyer.salesforce.einsteinvision.model.Dataset;
+import com.winkelmeyer.salesforce.einsteinvision.model.Example;
+import com.winkelmeyer.salesforce.einsteinvision.model.Label;
+import com.winkelmeyer.salesforce.einsteinvision.model.Model;
+import com.winkelmeyer.salesforce.einsteinvision.model.ModelMetrics;
+import com.winkelmeyer.salesforce.einsteinvision.model.PredictionResult;
 
 
 public class PredictionService {
@@ -33,16 +35,16 @@ public class PredictionService {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private boolean isExecuting = false;
-	private String bearerToken = System.getenv("PREDICTIVE_VISION_BEARER");
+	private String bearerToken = System.getenv("EINSTEIN_VISION_BEARER");
 
 	private static Logger logger = LoggerFactory.getLogger(PredictionService.class);
 
 	/**
 	 * <p>Create a new object of type PredictionService.</p>
 	 * 
-	 * <p>The PredictionService is the foundation for communicating with the Salesforce Einstein Prediction Service.</p>
+	 * <p>The PredictionService is the foundation for communicating with the Salesforce Einstein Vision Service.</p>
 	 * 
-	 * <p>As a pre-requisite for using the service a valid Bearer token must be stored in the environment variable PREDICTIVE_VISION_BEARER.</p>
+	 * <p>As a pre-requisite for using the service a valid Bearer token must be stored in the environment variable EINSTEIN_VISION_BEARER.</p>
 	 * 
 	 * <p>Please use the constructor PreditionServer(String bearerToken) if you want to pass the token to the service instead of using the environment variable.
 	 */
@@ -80,6 +82,70 @@ public class PredictionService {
 			logger.info("Status is: {}", isExecuting());
 		}
 		logger.info("Call {} has been executed.", "createDataset");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			Dataset dataset = mapper.readValue(client.getData(), Dataset.class);
+			logger.info("New Dataset with id {} has been created.", dataset.getId());
+			return dataset;
+		}
+		return null;
+	}
+	
+	/**
+	 * Creates a new Dataset from a local zip file. A Dataset is basically a group of different object types (named as "Label").
+	 * 
+	 * - The maximum file size is 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param filePath
+	 * The local file path of the zip file.
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createDatasetFromUrlAsynch(String url) throws Exception {
+		logger.info("Starting {} call from remote zip file {}", "createDatasetFromUrlAsynch", url);
+		BodyPartDatasetUrl parts = new BodyPartDatasetUrl(url);
+		HttpClient client = new HttpClient(this, DATASETS + "/upload", parts.build());
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting());
+		}
+		logger.info("Call {} has been executed.", "createDatasetFromUrlAsynch");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			Dataset dataset = mapper.readValue(client.getData(), Dataset.class);
+			logger.info("New Dataset with id {} has been created.", dataset.getId());
+			return dataset;
+		}
+		return null;
+	}
+	
+	/**
+	 * Creates a new Dataset from a remote zip file. A Dataset is basically a group of different object types (named as "Label").
+	 * 
+	 * - The maximum file size if 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param filePath
+	 * The local file path of the zip file.
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createDatasetFromZipFileAsynch(String filePath) throws Exception {
+		logger.info("Starting {} call from local zip file {}", "createDatasetFromZipFileAsynch", filePath);
+		BodyPartDatasetZipFile parts = new BodyPartDatasetZipFile(filePath);
+		HttpClient client = new HttpClient(this, DATASETS + "/upload", parts.build());
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting());
+		}
+		logger.info("Call {} has been executed.", "createDatasetFromZipFileAsynch");
 		if (client.isError()) {
 			handleError(client.getResponseError());
 		} else {
@@ -235,9 +301,115 @@ public class PredictionService {
 		}
 		return null;
 	}
+	
+	/**
+	 * Creates new Examples from a remote zip file.
+	 * 
+	 * - The maximum file size is 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param dataset
+	 * The Dataset to which the Examples are associated.
+	 * @param filePath
+	 * The local file path of the zip file.
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createExamplesFromUrl(Dataset dataset, String url) throws Exception {
+		return createExamplesFromUrl(dataset.getId(), url);
+	}
+	
+	/**
+	 * Creates new Examples from a remote zip file.
+	 * 
+	 * - The maximum file size is 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param datasetId
+	 * The id of the Dataset to which the Examples are associated.
+	 * @param filePath
+	 * The local file path of the zip file.
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createExamplesFromUrl(long datasetId, String url) throws Exception {
+		logger.info("Starting {} call from remote zip file {}", "createExamplesFromUrlAsynch", url);
+		BodyPartDatasetUrl parts = new BodyPartDatasetUrl(url);
+		HttpClient client = new HttpClient(this, DATASETS + "/" + datasetId, parts.build());
+		client.setPut(true);
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting());
+		}
+		logger.info("Call {} has been executed.", "createExamplesFromUrlAsynch");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			Dataset dataset = mapper.readValue(client.getData(), Dataset.class);
+			logger.info("New examples for dataset with id {} have been uploaded.", dataset.getId());
+			return dataset;
+		}
+		return null;
+	}
+	
+	/**
+	 * Creates new Examples from a local zip file.
+	 * 
+	 * - The maximum file size if 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param dataset
+	 * The Dataset to which the Examples are associated.
+	 * @param filePath
+	 * The local file path of the zip file.
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createExamplesFromZipFile(Dataset dataset, String filePath) throws Exception {
+		return createExamplesFromZipFile(dataset.getId(), filePath);
+	}
+	
+	/**
+	 * Creates new Examples from a local zip file.
+	 * 
+	 * - The maximum file size if 50 MB.
+	 * - The Dataset will be named based on the zip file name.
+	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
+	 * 
+	 * @param datasetId
+	 * The id of the Dataset to which the Examples are associated.
+	 * @param filePath
+	 * The local file path of the zip file.
+	 * @return
+	 * @throws Exception
+	 */
+	public Dataset createExamplesFromZipFile(long datasetId, String filePath) throws Exception {
+		logger.info("Starting {} call from local zip file {}", "createExamplesFromZipFileAsynch", filePath);
+		BodyPartDatasetZipFile parts = new BodyPartDatasetZipFile(filePath);
+		HttpClient client = new HttpClient(this, DATASETS + "/" + datasetId, parts.build());
+		client.setPut(true);
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting());
+		}
+		logger.info("Call {} has been executed.", "createExamplesFromZipFileAsynch");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			Dataset dataset = mapper.readValue(client.getData(), Dataset.class);
+			logger.info("New Dataset with id {} has been created.", dataset.getId());
+			return dataset;
+		}
+		return null;
+	}
 
 	/**
-	 * Adds a new image example for the predictive vision training.
+	 * Adds a new image example for the vision training.
 	 * @param datasetId
 	 * The id of the Dataset to which the image should be added.
 	 * @param name
@@ -386,8 +558,8 @@ public class PredictionService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Model trainDataset(Dataset dataset, String name, int epochs, double learningRate) throws Exception {
-		return trainDataset(dataset.getId(), name, epochs, learningRate);
+	public Model trainDataset(Dataset dataset, String name, int epochs, double learningRate, String trainingParams) throws Exception {
+		return trainDataset(dataset.getId(), name, epochs, learningRate, trainingParams);
 	}
 
 	/**
@@ -400,8 +572,10 @@ public class PredictionService {
 	 * Optional. The number of training iterations, valid values are between 1-100. Set to 0 if you want to use the default.
 	 * @param learningRate
 	 * Optional. The learning rate, valid values are betweed 0.0001 and 0.01. Set to 0 if you want to use the default.
+	 * @param trainParams
+	 * Optional. Additional training parameters. Please see the documentation for them. Pass an empty string if you won't configure them.
 	 */
-	public Model trainDataset(int datasetId, String name, int epochs, double learningRate) throws Exception {
+	public Model trainDataset(int datasetId, String name, int epochs, double learningRate, String trainParams) throws Exception {
 		Dataset dataset = getDataset(datasetId);
 		if (dataset != null) {
 			if (dataset.getTotalExamples()>0) {

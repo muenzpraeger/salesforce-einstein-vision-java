@@ -1,10 +1,10 @@
-package com.winkelmeyer.salesforce.predictivevision.model;
+package com.winkelmeyer.salesforce.einsteinvision.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.winkelmeyer.salesforce.predictivevision.exceptions.StringIsEmptyException;
-import com.winkelmeyer.salesforce.predictivevision.exceptions.StringTooLongException;
+import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringIsEmptyException;
+import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringTooLongException;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "id", "datasetId", "name", "numExamples", "object" })

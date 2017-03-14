@@ -1,4 +1,4 @@
-package com.winkelmeyer.salesforce.predictivevision.http.parts;
+package com.winkelmeyer.salesforce.einsteinvision.http.parts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.asynchttpclient.request.body.multipart.Part;
 import org.asynchttpclient.request.body.multipart.StringPart;
 
-import com.winkelmeyer.salesforce.predictivevision.exceptions.StringIsEmptyException;
-import com.winkelmeyer.salesforce.predictivevision.exceptions.StringTooLongException;
+import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringIsEmptyException;
+import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringTooLongException;
 
 public class BodyPartLabel {
 	

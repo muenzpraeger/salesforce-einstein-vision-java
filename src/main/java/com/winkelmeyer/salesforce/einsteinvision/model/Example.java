@@ -1,11 +1,11 @@
-package com.winkelmeyer.salesforce.predictivevision.model;
+package com.winkelmeyer.salesforce.einsteinvision.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "id", "name", "createdAt", "label", "object" })
+@JsonPropertyOrder({ "id", "name", "createdAt", "label", "location", "object" })
 public class Example {
 
 	@JsonProperty("id")
@@ -16,6 +16,8 @@ public class Example {
 	private String createdAt;
 	@JsonProperty("label")
 	private Label label;
+	@JsonProperty("location")
+	private String location;
 	@JsonProperty("object")
 	private String object;
 	
@@ -115,6 +117,14 @@ public class Example {
 	@JsonProperty("object")
 	public void setObject(String object) {
 		this.object = object;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 }

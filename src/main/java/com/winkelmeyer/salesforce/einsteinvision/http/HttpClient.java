@@ -1,4 +1,4 @@
-package com.winkelmeyer.salesforce.predictivevision.http;
+package com.winkelmeyer.salesforce.einsteinvision.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import org.asynchttpclient.Response;
 import org.asynchttpclient.request.body.multipart.Part;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.winkelmeyer.salesforce.predictivevision.PredictionService;
+import com.winkelmeyer.salesforce.einsteinvision.PredictionService;
 
 public class HttpClient {
 
@@ -20,6 +20,7 @@ public class HttpClient {
 	private String url;
 	private boolean isDelete = false;
 	private boolean isPost = false;
+	private boolean isPut = false;
 	private PredictionService predictionService;
 	private String data;
 	private List<Part> parts;
@@ -76,10 +77,14 @@ public class HttpClient {
 
 			if (isDelete) {
 				builder.setMethod("DELETE");
-			} else if (isPost) {
+			} else if (isPost || isPut) {
 				builder.addHeader("Content-Type", "multipart/form-data");
 				builder.setBodyParts(parts);
-				builder.setMethod("POST");
+				if (isPut) {
+					builder.setMethod("PUT");					
+				} else {
+					builder.setMethod("POST");
+				}
 			}
 
 			builder.setUrl(url);
@@ -169,6 +174,14 @@ public class HttpClient {
 
 	public String getData() {
 		return data;
+	}
+
+	public boolean isPut() {
+		return isPut;
+	}
+
+	public void setPut(boolean isPut) {
+		this.isPut = isPut;
 	}
 
 }

@@ -51,17 +51,17 @@ bintray {
 	user = bintrayUser
 	key = bintrayKey
     pkg {
-        name = 'salesforce-einstein-predictive-vision'
+        name = 'salesforce-einstein-vision'
         repo = 'salesforce-maven'
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/muenzpraeger/salesforce-einstein-predictive-vision.git'
+        vcsUrl = 'https://github.com/muenzpraeger/salesforce-einstein-vision-java.git'
 		labels = ['salesforce','einstein','prediction','images']
 		publicDownloadNumbers = true
 		version {
-			name = '1.0.0'
-			desc = 'Java Wrapper for Salesforce Einstein Predictive Vision'
+			name = '1.1.0'
+			desc = 'Java Wrapper for Salesforce Einstein Vision'
 			released  = new Date()
-			vcsTag = '1.0.0'
+			vcsTag = '1.1.0'
 			gpg {
 				sign = true
 			}
@@ -76,8 +76,8 @@ publishing {
 	publications {
 		mavenPub(MavenPublication) {
 			groupId 'com.winkelmeyer'
-			artifactId 'salesforce-einstein-predictive-vision'
-			version '1.0.0'
+			artifactId 'salesforce-einstein-vision'
+			version '1.1.0'
 			from components.java
 			artifact sourcesJar
 			artifact javadocJar

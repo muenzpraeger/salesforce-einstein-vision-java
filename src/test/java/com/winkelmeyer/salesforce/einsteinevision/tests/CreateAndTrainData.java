@@ -1,12 +1,12 @@
-package com.winkelmeyer.salesforce.predictivevision.tests;
+package com.winkelmeyer.salesforce.einsteinevision.tests;
 
 import java.io.File;
 import java.util.List;
 
-import com.winkelmeyer.salesforce.predictivevision.PredictionService;
-import com.winkelmeyer.salesforce.predictivevision.model.Dataset;
-import com.winkelmeyer.salesforce.predictivevision.model.Example;
-import com.winkelmeyer.salesforce.predictivevision.model.Label;
+import com.winkelmeyer.salesforce.einsteinvision.PredictionService;
+import com.winkelmeyer.salesforce.einsteinvision.model.Dataset;
+import com.winkelmeyer.salesforce.einsteinvision.model.Example;
+import com.winkelmeyer.salesforce.einsteinvision.model.Label;
 
 /**
  * This sample class trains the Salesforce Einstein Vision Service with the given images within local folders. 
@@ -72,7 +72,7 @@ public class CreateAndTrainData {
 				}
 			}
 
-			service.trainDataset(ds.getId(), "Test Training", 0, 0);
+			service.trainDataset(ds.getId(), "Test Training", 0, 0, "");
 
 		} catch (Exception e) {
 			e.printStackTrace();
