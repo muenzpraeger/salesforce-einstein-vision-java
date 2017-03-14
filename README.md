@@ -34,7 +34,7 @@ repositories {
 Add this dependency to your build.gradle file.
 
 ```
-compile 'com.winkelmeyer:salesforce-einstein-vision:1.0.0'
+compile 'com.winkelmeyer:salesforce-einstein-vision:1.1.0'
 ```
 
 ### Maven
