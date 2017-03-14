@@ -99,8 +99,8 @@ public class PredictionService {
 	 * - The Dataset will be named based on the zip file name.
 	 * - Each object type has to be in a separate sub-folder which will be used as Label value.
 	 * 
-	 * @param filePath
-	 * The local file path of the zip file.
+	 * @param url
+	 * The remote url
 	 * @return
 	 * @throws Exception
 	 */
@@ -311,8 +311,8 @@ public class PredictionService {
 	 * 
 	 * @param dataset
 	 * The Dataset to which the Examples are associated.
-	 * @param filePath
-	 * The local file path of the zip file.
+	 * @param url
+	 * The remote url
 	 * @return
 	 * @throws Exception
 	 */
@@ -329,8 +329,8 @@ public class PredictionService {
 	 * 
 	 * @param datasetId
 	 * The id of the Dataset to which the Examples are associated.
-	 * @param filePath
-	 * The local file path of the zip file.
+	 * @param url
+	 * The remote url.
 	 * @return
 	 * @throws Exception
 	 */
