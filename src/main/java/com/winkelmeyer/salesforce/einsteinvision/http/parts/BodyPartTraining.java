@@ -7,8 +7,8 @@ import org.asynchttpclient.request.body.multipart.Part;
 import org.asynchttpclient.request.body.multipart.StringPart;
 
 import com.winkelmeyer.salesforce.einsteinvision.exceptions.NoValuesException;
-import com.winkelmeyer.salesforce.einsteinvision.exceptions.NumberToBigException;
-import com.winkelmeyer.salesforce.einsteinvision.exceptions.NumberToSmallException;
+import com.winkelmeyer.salesforce.einsteinvision.exceptions.NumberTooBigException;
+import com.winkelmeyer.salesforce.einsteinvision.exceptions.NumberTooSmallException;
 import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringIsEmptyException;
 import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringTooLongException;
 
@@ -19,7 +19,7 @@ public class BodyPartTraining {
 	private int epochs;
 	private double learningRate;
 	
-	private boolean hasEpochs = false;
+	private boolean hasEpochs = true;
 	
 	private static double DEFAULT_LEARNING_RATE = 0.0001;
 	private static double MIN_LEARNING_RATE = 0.0001;
@@ -38,15 +38,15 @@ public class BodyPartTraining {
     	if (epochs==0) {
     		hasEpochs = false;
     	} else if (epochs>100) {
-    		throw new NumberToBigException("epochs", 100, epochs);
+    		throw new NumberTooBigException("epochs", 100, epochs);
     	}
     	if (learningRate==0) {
     		learningRate = DEFAULT_LEARNING_RATE;
     	} else {
     		if (learningRate < MIN_LEARNING_RATE) {
-    			throw new NumberToSmallException("learningRate", MIN_LEARNING_RATE, learningRate);
+    			throw new NumberTooSmallException("learningRate", MIN_LEARNING_RATE, learningRate);
     		} else if (learningRate > MAX_LEARNING_RAGE) {
-    			throw new NumberToBigException("learningRate", MAX_LEARNING_RAGE, learningRate);
+    			throw new NumberTooBigException("learningRate", MAX_LEARNING_RAGE, learningRate);
     		}
     	}
     	this.datasetId = datasetId;
@@ -100,7 +100,7 @@ public class BodyPartTraining {
 		if (epochs==0) {
     		hasEpochs = false;
     	} else if (epochs>100) {
-    		throw new NumberToBigException("epochs", 100, epochs);
+    		throw new NumberTooBigException("epochs", 100, epochs);
     	}
 		this.epochs = epochs;
 	}
@@ -114,9 +114,9 @@ public class BodyPartTraining {
     		learningRate = DEFAULT_LEARNING_RATE;
     	} else {
     		if (learningRate < MIN_LEARNING_RATE) {
-    			throw new NumberToSmallException("learningRate", MIN_LEARNING_RATE, learningRate);
+    			throw new NumberTooSmallException("learningRate", MIN_LEARNING_RATE, learningRate);
     		} else if (learningRate > MAX_LEARNING_RAGE) {
-    			throw new NumberToBigException("learningRate", MAX_LEARNING_RAGE, learningRate);
+    			throw new NumberTooBigException("learningRate", MAX_LEARNING_RAGE, learningRate);
     		}
     	}
 		this.learningRate = learningRate;

@@ -1,22 +1,14 @@
 package com.winkelmeyer.salesforce.einsteinvision.http.parts;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.asynchttpclient.request.body.multipart.FilePart;
 import org.asynchttpclient.request.body.multipart.Part;
 import org.asynchttpclient.request.body.multipart.StringPart;
 
-import com.winkelmeyer.salesforce.einsteinvision.exceptions.FileNoZipFileException;
-import com.winkelmeyer.salesforce.einsteinvision.exceptions.FileTooLargeException;
-import com.winkelmeyer.salesforce.einsteinvision.exceptions.NoValuesException;
 import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringIsEmptyException;
-import com.winkelmeyer.salesforce.einsteinvision.exceptions.StringTooLongException;
-import com.winkelmeyer.salesforce.einsteinvision.exceptions.TooManyValuesException;
 
 public class BodyPartDatasetUrl {
 
