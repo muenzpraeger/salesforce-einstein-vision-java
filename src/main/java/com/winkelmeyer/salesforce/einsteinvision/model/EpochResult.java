@@ -32,7 +32,7 @@ public class EpochResult {
 	}
 	
 	/**
-	 * @return the examplexpectedLabeleLabel
+	 * @return the expectedLabel
 	 */
 	@JsonProperty("expectedLabel")
 	public String getExpectedLabel() {
@@ -40,7 +40,7 @@ public class EpochResult {
 	}
 	
 	/**
-	 * @param exampleLabel the expectedLabel to set
+	 * @param expectedLabel the expectedLabel to set
 	 */
 	@JsonProperty("expectedLabel")
 	public void setExpectedLabel(String expectedLabel) {

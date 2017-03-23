@@ -34,7 +34,7 @@ public class ModelLearningCurve {
 	}
 	
 	/**
-	 * @return the testAccuracy
+	 * @return the epochResults
 	 */
 	@JsonProperty("epochResults")
 	public List<EpochResult> getTestepochResultsAccuracy() {
@@ -42,7 +42,7 @@ public class ModelLearningCurve {
 	}
 	
 	/**
-	 * @param testAccuracy the testAccuracy to set
+	 * @param epochResults the epochResults to set
 	 */
 	@JsonProperty("epochResults")
 	public void setEpochResults(List<EpochResult> epochResults) {
