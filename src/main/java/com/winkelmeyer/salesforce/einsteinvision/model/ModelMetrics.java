@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "f1", "testAccuracy", "trainingLoss", "confusionMatrix", "trainingAccuracy" })
+@JsonPropertyOrder({ "f1", "testAccuracy", "trainingLoss", "confusionMatrix", "trainingAccuracy", "labels" })
 public class ModelMetrics {
 
 	@JsonProperty("f1")
@@ -20,6 +20,8 @@ public class ModelMetrics {
 	private List<List<Integer>> confusionMatrix = new ArrayList<List<Integer>>();
 	@JsonProperty("trainingAccuracy")
 	private Double trainingAccuracy;
+	@JsonProperty("labels")
+	private List<String> labels;
 
 	/**
 	 * 
@@ -114,6 +116,22 @@ public class ModelMetrics {
 	@JsonProperty("trainingAccuracy")
 	public void setTrainingAccuracy(Double trainingAccuracy) {
 		this.trainingAccuracy = trainingAccuracy;
+	}
+
+	/**
+	 * @return the labels
+	 */
+	@JsonProperty("labels")
+	public List<String> getLabels() {
+		return labels;
+	}
+
+	/**
+	 * @param labels the labels to set
+	 */
+	@JsonProperty("labels")
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
 	}
 
 }

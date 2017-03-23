@@ -17,6 +17,7 @@ import com.winkelmeyer.salesforce.einsteinvision.model.Dataset;
 import com.winkelmeyer.salesforce.einsteinvision.model.Example;
 import com.winkelmeyer.salesforce.einsteinvision.model.Label;
 import com.winkelmeyer.salesforce.einsteinvision.model.Model;
+import com.winkelmeyer.salesforce.einsteinvision.model.ModelLearningCurve;
 import com.winkelmeyer.salesforce.einsteinvision.model.ModelMetrics;
 import com.winkelmeyer.salesforce.einsteinvision.model.PredictionResult;
 
@@ -714,6 +715,32 @@ public class PredictionService {
 			ModelMetrics modelMetrics = mapper.readValue(client.getData(), ModelMetrics.class);
 			logger.info("ModelMetrics have been read.");
 			return modelMetrics;
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the model learning curve
+	 * @param modelMetricsId
+	 * The model id for which the metrics should be fetched.
+	 * @return
+	 * @throws Exception
+	 */
+	public ModelLearningCurve getModelLearningCurve(String modelMetricsId) throws Exception {
+		logger.info("Starting {} call with parameter {}", "getModelLearningCurve", modelMetricsId);
+		HttpClient client = new HttpClient(this, MODELS + "/" + modelMetricsId + "/lc");
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting() );
+		}
+		logger.info("Call {} has been executed.", "getModelLearningCurve");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			ModelLearningCurve modelLearningCurve = mapper.readValue(client.getData(), ModelLearningCurve.class);
+			logger.info("ModelLearningCurve has been read.");
+			return modelLearningCurve;
 		}
 		return null;
 	}
