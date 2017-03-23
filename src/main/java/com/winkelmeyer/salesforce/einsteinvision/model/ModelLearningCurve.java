@@ -15,7 +15,7 @@ public class ModelLearningCurve {
 	@JsonProperty("epochResults")
 	private List<EpochResult> epochResults;
 	@JsonProperty("metricsData")
-	private ModelMetrics modelMetrics;
+	private ModelMetrics metricsData;
 	
 	/**
 	 * @return the epoch
@@ -50,19 +50,19 @@ public class ModelLearningCurve {
 	}
 	
 	/**
-	 * @return the modelMetrics
+	 * @return the metricsData
 	 */
 	@JsonProperty("metricsData")
-	public ModelMetrics getModelMetrics() {
-		return modelMetrics;
+	public ModelMetrics getMetricsData() {
+		return metricsData;
 	}
 	
 	/**
-	 * @param modelMetrics the modelMetrics to set
+	 * @param metricsData the modelMetrics to set
 	 */
 	@JsonProperty("metricsData")
-	public void setModelMetrics(ModelMetrics modelMetrics) {
-		this.modelMetrics = modelMetrics;
+	public void setMetricsData(ModelMetrics metricsData) {
+		this.metricsData = metricsData;
 	}
 
 }

@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "exampleName", "exampleLabel", "predictedLabel" })
+@JsonPropertyOrder({ "exampleName", "expectedLabel", "predictedLabel" })
 public class EpochResult {
 	
 	@JsonProperty("exampleName")
 	private String exampleName;
-	@JsonProperty("exampleLabel")
-	private String exampleLabel;
+	@JsonProperty("expectedLabel")
+	private String expectedLabel;
 	@JsonProperty("predictedLabel")
 	private String predictedLabel;
 	
@@ -32,19 +32,19 @@ public class EpochResult {
 	}
 	
 	/**
-	 * @return the exampleLabel
+	 * @return the examplexpectedLabeleLabel
 	 */
-	@JsonProperty("exampleLabel")
-	public String getExampleLabel() {
-		return exampleLabel;
+	@JsonProperty("expectedLabel")
+	public String getExpectedLabel() {
+		return expectedLabel;
 	}
 	
 	/**
-	 * @param exampleLabel the exampleLabel to set
+	 * @param exampleLabel the expectedLabel to set
 	 */
-	@JsonProperty("exampleLabel")
-	public void setExampleLabel(String exampleLabel) {
-		this.exampleLabel = exampleLabel;
+	@JsonProperty("expectedLabel")
+	public void setExpectedLabel(String expectedLabel) {
+		this.expectedLabel = expectedLabel;
 	}
 	
 	/**

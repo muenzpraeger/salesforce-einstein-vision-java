@@ -726,7 +726,7 @@ public class PredictionService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ModelLearningCurve getModelLearningCurve(String modelMetricsId) throws Exception {
+	public ModelLearningCurve[] getModelLearningCurve(String modelMetricsId) throws Exception {
 		logger.info("Starting {} call with parameter {}", "getModelLearningCurve", modelMetricsId);
 		HttpClient client = new HttpClient(this, MODELS + "/" + modelMetricsId + "/lc");
 		logger.info("Target URL is {}", client.getUrl());
@@ -738,7 +738,7 @@ public class PredictionService {
 		if (client.isError()) {
 			handleError(client.getResponseError());
 		} else {
-			ModelLearningCurve modelLearningCurve = mapper.readValue(client.getData(), ModelLearningCurve.class);
+			ModelLearningCurve[] modelLearningCurve = mapper.readValue(client.getData(), ModelLearningCurve[].class);
 			logger.info("ModelLearningCurve has been read.");
 			return modelLearningCurve;
 		}
