@@ -28,6 +28,8 @@ public class Dataset {
 	private Integer totalLabels;
 	@JsonProperty("object")
 	private String object;
+	@JsonProperty("object")
+	private String type;
 
 
 	public Dataset() {
@@ -215,6 +217,20 @@ public class Dataset {
 	 */
 	public void setStatusMsg(String statusMsg) {
 		this.statusMsg = statusMsg;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
