@@ -28,7 +28,7 @@ public class Dataset {
 	private Integer totalLabels;
 	@JsonProperty("object")
 	private String object;
-	@JsonProperty("object")
+	@JsonProperty("type")
 	private String type;
 
 

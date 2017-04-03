@@ -123,7 +123,7 @@ public class HttpClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return (getStatusCode()!=200 || getStatusCode()!=204);
+		return (getStatusCode()!=200 && getStatusCode()!=204);
 	}
 
 	public int getStatusCode() {
