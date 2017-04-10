@@ -32,7 +32,7 @@ public class PredictionService {
 	private String LABELS = "/labels";
 	private String EXAMPLES = "/examples";
 	private String TRAIN = BASE_URL + "/vision/train";
-	private String MODELS = "/models";
+	private String MODELS = "/vision/models";
 	private String PREDICT = BASE_URL + "/vision/predict";
 	private String API_USAGE = BASE_URL + "/apiusage";
 
@@ -767,7 +767,7 @@ public class PredictionService {
 	 */
 	public Model[] getModels(int datasetId) throws Exception {
 		logger.info("Starting {} call", "getModels");
-		HttpClient client = new HttpClient(this, DATASETS + "/" + datasetId + MODELS);
+		HttpClient client = new HttpClient(this, DATASETS + "/" + datasetId + "/models");
 		logger.info("Target URL is {}", client.getUrl());
 		client.execute();
 		while (isExecuting()) {
