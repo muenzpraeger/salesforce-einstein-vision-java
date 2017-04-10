@@ -34,7 +34,7 @@ repositories {
 Add this dependency to your build.gradle file.
 
 ```
-compile 'com.winkelmeyer:salesforce-einstein-vision:1.2.1'
+compile 'com.winkelmeyer:salesforce-einstein-vision:1.3.0'
 ```
 
 ### Maven
@@ -78,7 +78,7 @@ Then add this dependency to the pom.xml.
 <dependency>
   <groupId>com.winkelmeyer</groupId>
   <artifactId>salesforce-einstein-vision</artifactId>
-  <version>1.2.1</version>
+  <version>1.3.0</version>
   <type>pom</type>
 </dependency>
 ```
