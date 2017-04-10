@@ -13,6 +13,7 @@ import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartExample;
 import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartLabel;
 import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartPrediction;
 import com.winkelmeyer.salesforce.einsteinvision.http.parts.BodyPartTraining;
+import com.winkelmeyer.salesforce.einsteinvision.model.ApiUsage;
 import com.winkelmeyer.salesforce.einsteinvision.model.Dataset;
 import com.winkelmeyer.salesforce.einsteinvision.model.Example;
 import com.winkelmeyer.salesforce.einsteinvision.model.Label;
@@ -25,14 +26,15 @@ import com.winkelmeyer.salesforce.einsteinvision.model.PredictionResult;
 public class PredictionService {
 
 	// Base URL for the PredictionService
-	private static String BASE_URL = "https://api.metamind.io/v1/vision";
+	private static String BASE_URL = "https://api.metamind.io/v1";
 
-	private String DATASETS = BASE_URL + "/datasets";
+	private String DATASETS = BASE_URL + "/vision/datasets";
 	private String LABELS = "/labels";
 	private String EXAMPLES = "/examples";
-	private String TRAIN = BASE_URL + "/train";
+	private String TRAIN = BASE_URL + "/vision/train";
 	private String MODELS = "/models";
-	private String PREDICT = BASE_URL + "/predict";
+	private String PREDICT = BASE_URL + "/vision/predict";
+	private String API_USAGE = BASE_URL + "/apiusage";
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private boolean isExecuting = false;
@@ -916,6 +918,31 @@ public class PredictionService {
 			PredictionResult predictions = mapper.readValue(client.getData(), PredictionResult.class);
 			logger.info("Image has been predicted.");
 			return predictions;
+		}
+		return null;
+	}
+	
+	/**
+	 * Fetches data about the API usage of the authenticated PredictionService.
+	 * 
+	 * @return An array of API usage elements.
+	 * @throws Exception
+	 */
+	public ApiUsage[] getApiUsage() throws Exception {
+		logger.info("Starting {} call", "apiUsage");
+		HttpClient client = new HttpClient(this, API_USAGE);
+		logger.info("Target URL is {}", client.getUrl());
+		client.execute();
+		while(isExecuting()) {
+			logger.info("Status is: {}", isExecuting());
+		}
+		logger.info("Call {} has been executed.", "apiUsage");
+		if (client.isError()) {
+			handleError(client.getResponseError());
+		} else {
+			ApiUsage[] apiUsage = mapper.readValue(client.getData(), ApiUsage[].class);
+			logger.info("API usage has been fetched.");
+			return apiUsage;
 		}
 		return null;
 	}
